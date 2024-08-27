@@ -1,0 +1,127 @@
+.header-top {
+  background-color: var(--color-mine-shaft);
+  justify-content: space-between;
+  display: flex;
+  padding: 13px 180px;
+}
+
+.link {
+  color: var(--color-nobel);
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+}
+
+.header-left {
+  gap: 8px;
+}
+
+.header-right {
+  gap: 40px;
+}
+
+.header-logo {
+  display: flex;
+  gap: 3px;
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name-logo {
+  font-weight: var(--font-weight-medium);
+  font-size: 32px;
+  color: var(--color-deep-fir);
+}
+
+.form-input-search {
+  position: relative;
+  display: flex;
+}
+
+.icon-search-absolute {
+  position: absolute;
+  top: 10px;
+  left: 5px;
+}
+
+.input-search {
+  width: 400px;
+}
+
+.header-bottom {
+  padding: 24px 182px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 19.5px 182px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 32px;
+}
+
+.breadcrumbs {
+  background-image: url('/src/assets/images/header/Breadcrumbs.jpg');
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.link-item {
+  font-size: 14px;
+  color: var(--color-dove-gray);
+}
+
+.block-cart {
+  position: relative;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.block-total-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.name-cart {
+  font-size: 11px;
+  color: var(--color-tundora);
+  font-weight: var(--font-weight-regular);
+  line-height: 13.2px;
+}
+
+.total-price {
+  font-size: 14px;
+  color: var(--color-cod-gray);
+  font-weight: var(--font-weight-medium);
+  line-height: 14px;
+}
+
+.link-phone {
+  color: var(--color-tundora);
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+}
+
+.list-nav {
+  display: flex;
+  padding: 48px 181px;
+  align-items: center;
+  gap: 5px;
+}
+
+.list-nav a {
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray);
+}

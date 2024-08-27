@@ -1,0 +1,11 @@
+.heading-secondary {
+  font-size: 20px;
+  font-weight: var(--font-weight-medium);
+  font-family: 'Poppins';
+}
+
+.text-center {
+  text-align: center;
+}
+
+

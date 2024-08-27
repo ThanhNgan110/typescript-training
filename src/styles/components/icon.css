@@ -1,0 +1,154 @@
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-small {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-medium {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-location {
+  width: 15px;
+  height: 18px;
+  background-image: url('/src/assets/images/icons/icon-location.svg');
+}
+
+.icon-drop-down {
+  width: 7px;
+  height: 4px;
+  background-image: url('/src/assets/images/icons/icon-drop-down.svg');
+}
+
+.icon-logo {
+  background-image: url('/src/assets/images/header/logo.png');
+}
+
+.icon-heart {
+  width: 32px;
+  height: 32px;
+  background-image: url('/src/assets/images/icons/icon-heart.svg');
+}
+
+.icon-cart {
+  background-image: url('/src/assets/images/icons/icon-cart.svg');
+}
+
+.icon-search {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-search.svg');
+}
+
+.icon-phone {
+  width: 28px;
+  height: 28px;
+  background-image: url('/src/assets/images/icons/icon-phone.svg');
+}
+
+.icon-home {
+  width: 24px;
+  height: 24px;
+  background-image: url('/src/assets/images/icons/icon-home.svg');
+}
+
+.icon-circle {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-vertical {
+  width: 24px;
+}
+
+.icon-circle {
+  background: var(--color-green);
+  text-align: center;
+  color: var(--color-white);
+  border-radius: 11px;
+  padding: 4px;
+  position: absolute;
+  font-size: 10px;
+  bottom: 22px;
+  left: 20px;
+}
+
+.icon-filter {
+  width: 20px;
+  height: 17px;
+  background-image: url('/src/assets/images/icons/icon-filter.svg');
+}
+
+.icon-bag {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-bag.svg');
+}
+
+.icon-top {
+  width: 12px;
+  height: 6px;
+  background-image: url('/src/assets/images/icons/icon-top.svg');
+}
+
+.icon-chervon-down-left {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-chevron-down-left.svg');
+}
+
+.icon-chervon-down-right {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-chevron-down-right.svg');
+}
+
+.icon-social {
+  width: 40px;
+  height: 40px;
+}
+
+.icon-social-instagram {
+  background-image: url('/src/assets/images/icons/icon-instagram.svg');
+}
+
+.icon-social-twitter {
+  background-image: url('/src/assets/images/icons/icon-twitter.svg');
+}
+
+.icon-social-pinterest {
+  background-image: url('/src/assets/images/icons/icon-pinterest.svg');
+}
+
+.icon-social-facebook {
+  background-image: url('/src/assets/images/icons/icon-media.svg');
+}
+.icon-close {
+  width: 24px;
+  height: 24px;
+  background-image: url('/src/assets/images/icons/icon-close.png');
+}
+
+.icon-minus {
+  width: 14px;
+  height: 14px;
+  background-image: url('/src/assets/images/icons/icon-minus.svg');
+}
+
+.icon-plus {
+  width: 14px;
+  height: 14px;
+  background-image: url('/src/assets/images/icons/icon-plus.svg');
+}
+
+.icon-next {
+  width: 9px;
+  height: 4px;
+  background-image: url("/src/assets/images/icons/icon-next.svg");
+}

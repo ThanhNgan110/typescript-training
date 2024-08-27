@@ -1,0 +1,12 @@
+{
+	"root": "./src/",
+	"input": "*.html",
+	"output": "./dist/",
+	"plugins": {
+		"posthtml-include": {
+			"root": "./src/",
+			"encoding": "utf-8",
+			"output": "./dist/"
+		}
+	}
+}

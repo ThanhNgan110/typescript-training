@@ -1,0 +1,102 @@
+.btn {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn-search {
+  background-color: var(--color-green);
+  border: var(--color-white);
+  padding: 14px 24px;
+  color: var(--color-white);
+  font-size: 14px;
+}
+
+.btn-search:hover {
+  padding: 13px 23px;
+  background-color: var(--color-white);
+  color: var(--color-green);
+  border: 1px solid;
+  border-color: var(--color-green);
+}
+
+.btn-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--color-green);
+  padding: 14px 32px;
+  border-radius: 43px;
+  border: var(--color-white);
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
+  font-size: 14px;
+}
+
+.btn-subscribe {
+  border-radius: 43px;
+  background-color: var(--color-green);
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
+  font-size: 16px;
+  border: none;
+  padding: 16px 40px;
+}
+
+.btn-card {
+  background-color: var(--color-white);
+  border: var(--color-white);
+  cursor: pointer;
+}
+
+.btn-minus, .btn-plus {
+  width: 34px;
+  height: 34px;
+  border-radius: 170px;
+  background-color: var(--color-concrete);
+  border: var(--color-white);
+}
+
+.btn-checkout, .btn-order {
+  background-color: var(--color-green);
+  border: var(--color-white);
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+  border-radius: 43px;
+  padding: 16px 140px;
+  white-space: nowrap;
+}
+
+.btn-checkout:hover {
+  padding: 15px 139px;
+  background-color: var(--color-white);
+  color: var(--color-green);
+  border: 1px solid var(--color-green);
+}
+
+.btn-return, .btn-update-cart {
+  background-color: var(--color-concrete);
+  padding: 14px 32px;
+  border: var(--color-white);
+  border-radius: 43px;
+  color: var(--color-tundora);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.btn-return:hover, .btn-update-cart:hover {
+  background-color: var(--color-white);
+  color: var(--color-green);
+  border: 1px solid;
+  border-color: var(--color-green);
+  padding: 13px 31px;
+}
+
+.btn-delete {
+  border: var(--color-white);
+  background-color: var(--color-white);
+}
+
+.btn-delete:hover {
+  transform: scale(1.1);
+}

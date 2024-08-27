@@ -1,0 +1,21 @@
+.toastify {
+  padding: 12px 20px;
+  display: inline-block;
+  position: fixed;
+  border-radius: 2px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.toastify-success {
+  color: var(--color-text-success);
+  background: var(--color-success);
+  border-color: var(--border-color-success);
+}
+
+.toastify-danger {
+  color: var(--color-text-danger);
+  background: var(--color-danger);
+  border-color: var(--border-color-danger);
+}
