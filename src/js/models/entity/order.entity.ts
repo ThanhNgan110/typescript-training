@@ -1,13 +1,18 @@
-import {
-  validateEmpty,
-  validateInteger,
-  validateEmail,
-  validateString,
-  validatePhone,
-} from "../../helpers/validator";
+import {validateEmpty} from "../../helpers/validator"
+
+import Order from "../../type/order";
 
 export default class OrderEntity {
-  constructor(data) {
+  firstName:string;
+  lastName:string;
+  companyName:string;
+  address: string;
+  zipCode:string;
+  email:string;
+  phoneNumber:string;
+  note:string
+
+  constructor(data:Order) {
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.companyName = data.companyName;
@@ -18,7 +23,7 @@ export default class OrderEntity {
     this.note = data.note;
   }
 
-  validate = (orderEntity) => {
+  validate = (orderEntity:Order) => {
     let formError = {};
     const key = Object.keys(orderEntity)[0];
     const value = orderEntity[key];
