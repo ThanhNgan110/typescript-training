@@ -1,4 +1,6 @@
-export const displayProduct = (products) => {
+import Product from "../type/product";
+
+export const displayProduct = (products: Product[]) => {
   let contentProduct = "";
   if (products) {
     products.forEach((item) => {
@@ -8,9 +10,9 @@ export const displayProduct = (products) => {
     contentProduct = "";
   }
   return contentProduct;
-}
+};
 
-export const productTemplate = (product) => {
+export const productTemplate = (product: Product) => {
   const { id, imgURL, name, price } = product;
   return `
   <article class="card-product">
@@ -26,9 +28,9 @@ export const productTemplate = (product) => {
   </div>
   </article>
   `;
-}
+};
 
-export const cartNumberBadge = ({product, total}) => {
+export const cartNumberBadge = ({ product = [], total = 0 }) => {
   return `
     <span class="icon icon-medium icon-cart"></span>
     <span class="icon icon-circle">${product.length}</span>
@@ -37,7 +39,3 @@ export const cartNumberBadge = ({product, total}) => {
       <p class="total-price">$${total}</p>
     </div>`;
 };
-
-
-
-

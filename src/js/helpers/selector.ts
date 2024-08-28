@@ -1,8 +1,9 @@
 // Get element(s) by CSS selector:
-const querySelector = (selector) => document.querySelector(selector);
+const querySelector = (selector: string) => document.querySelector(selector);
 
-const querySelectorAll = (selector) => document.querySelectorAll(selector);
+const querySelectorAll = (selector: string) =>
+  document.querySelectorAll(selector);
 
-const getElementById = (selector) => document.getElementById(selector);
+const getElementById = (selector: string) => document.getElementById(selector);
 
 export { querySelector, querySelectorAll, getElementById };

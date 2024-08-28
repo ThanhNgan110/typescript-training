@@ -1,7 +1,9 @@
 import { cartSum } from "./cart.template";
+import Product from "../type/product";
+
 let total = "";
 
-export const orderSummary = (products) => {
+export const orderSummary = (products: Product[]) => {
   const cartSummery = cartSum(products);
   total = cartSummery.total;
   let content = "";
@@ -26,14 +28,14 @@ export const orderSummary = (products) => {
   `;
 };
 
-export const orderSummeryTemplate = (product) => {
+export const orderSummeryTemplate = (product: Product) => {
   const { imgURL, name, amount, price } = product;
   return `<div>
           <div class="flex justify-content-between align-center">
             <div class="flex align-center">
               <img style="width:100px" src="${imgURL}" alt="${name}" />${name} x ${amount}
             </div>
-            <p>$${parseFloat(price * amount)}</p>
+            <p>$${price * amount}</p>
           </div>
         </div>
     `;

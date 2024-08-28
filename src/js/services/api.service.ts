@@ -1,5 +1,8 @@
 export default class ApiService {
-  constructor(baseURL, endPoint) {
+  private baseURL: string;
+  private endPoint: string;
+
+  constructor(baseURL: string, endPoint: string) {
     this.baseURL = baseURL;
     this.endPoint = endPoint;
   }
@@ -13,12 +16,14 @@ export default class ApiService {
       if (res.ok) {
         return await res.json();
       }
-    } catch (error) {
-      throw new Error(`Get data fail ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Get data fail ${error.message}`);
+      }
     }
-  };
+  }
 
-  async post(data) {
+  async post(data: object) {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}`, {
         method: "POST",
@@ -26,14 +31,16 @@ export default class ApiService {
         body: JSON.stringify(data),
       });
       if (res.ok) {
-       return await res.json();
+        return await res.json();
       }
-    } catch (error) {
-      throw new Error(`Post data fail ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Post data fail ${error.message}`);
+      }
     }
-  };
+  }
 
-  async patch(payload) {
+  async patch(payload: { id: string }) {
     try {
       const res = await fetch(
         `${this.baseURL}/${this.endPoint}/${payload.id}`,
@@ -46,21 +53,25 @@ export default class ApiService {
       if (res.ok) {
         return await res.json();
       }
-    } catch (error) {
-      throw new Error(`Patch data fail ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Path data fail ${error.message}`);
+      }
     }
-  };
+  }
 
-  async delete(payload) {
+  async delete(payload: string) {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}/${payload}`, {
-        method: "DELETE"
+        method: "DELETE",
       });
       if (res.ok) {
         return await res.json();
       }
-    } catch (error) {
-      throw new Error(`DELETE data fail ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Delete data fail ${error.message}`);
+      }
     }
-  };
+  }
 }

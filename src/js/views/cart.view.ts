@@ -8,42 +8,59 @@ import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 
 export default class CartView {
+  wrapperCart: Element | null;
+  btnOpenModal: Element | null;
+  modalCart: HTMLElement;
+  modalCheckout: HTMLElement;
+
   constructor() {
     this.wrapperCart = querySelector(".wrapper-cart");
     this.btnOpenModal = getElementById("btn-open-modal");
-    this.modalCart = getElementById("modal-cart");
-    this.modalCheckout = getElementById("modal-checkout");
+    this.modalCart = getElementById("modal-cart") as HTMLElement;
+    this.modalCheckout = getElementById("modal-checkout") as HTMLElement;
   }
 
-  renderCart = ({ products, handleUpdateCart, handleRenderCheckout }) => {
+  renderCart = ({
+    products = [],
+    handleUpdateCart = Function,
+    handleRenderCheckout = Function,
+  }) => {
     cartSum(products);
-    this.wrapperCart.innerHTML = displayCart(products);
+    if (this.wrapperCart) {
+      this.wrapperCart.innerHTML = displayCart(products);
+    }
     this.bindControlsEvents(handleUpdateCart, handleRenderCheckout);
   };
 
-  bindControlsEvents = (handleUpdateCart, handleRenderCheckout) => {
+  bindControlsEvents = (
+    handleUpdateCart: () => void,
+    handleRenderCheckout: () => void
+  ) => {
     this.bindChangeActions();
     this.bindUpdateCart(handleUpdateCart);
     this.bindCloseModalCart();
     this.bindCheckoutCart(handleRenderCheckout);
   };
 
-  bindShowModal = (handler) => {
-    this.btnOpenModal.addEventListener("click", () => {
-      this.modalCart.style.display = "block";
-      handler();
-    });
+  bindShowModal = (handler: Function) => {
+    if (this.btnOpenModal) {
+      this.btnOpenModal.addEventListener("click", () => {
+        this.modalCart.style.display = "block";
+        handler();
+      });
+    }
   };
 
   bindChangeActions = () => {
-    const cartTableBody = getElementById("cart-table-body");
-    cartTableBody.addEventListener("click", (e) => {
+    const cartTableBody = getElementById("cart-table-body") as HTMLElement;
+    cartTableBody.addEventListener("click", (e: Event) => {
+      const target = e.target as HTMLElement;
       const dataType =
-        e.target.getAttribute("data-type") ||
-        e.target.parentNode.getAttribute("data-type");
+        target.getAttribute("data-type") ||
+        target.parentNode?.getAttribute("data-type");
       const dataId =
-        e.target.getAttribute("data-id") ||
-        e.target.parentNode.getAttribute("data-id");
+        target.getAttribute("data-id") ||
+        target.parentNode?.getAttribute("data-id");
 
       switch (dataType) {
         case "minus":
@@ -64,13 +81,17 @@ export default class CartView {
     });
   };
 
-  handleChangeQuantity = (cartTableBody, type, dataId) => {
+  handleChangeQuantity = (
+    cartTableBody: HTMLElement,
+    type: string,
+    dataId: string
+  ) => {
     const inputQuantity = cartTableBody.querySelector(
       `input[data-id="${dataId}"]`
-    );
+    ) as HTMLInputElement;
     switch (type) {
       case "plus":
-        inputQuantity.value && inputQuantity.value++;
+        inputQuantity.value && parseInt(inputQuantity.value + 1);
         break;
 
       case "minus":
@@ -81,7 +102,7 @@ export default class CartView {
     }
   };
 
-  bindHiddenProduct = (productId) => {
+  bindHiddenProduct = (productId: string) => {
     const productRows = querySelectorAll(".col-tbody");
     productRows.forEach((productRow) => {
       if (productRow.getAttribute("data-id") === productId) {
@@ -92,7 +113,7 @@ export default class CartView {
     });
   };
 
-  bindUpdateCart = (handler) => {
+  bindUpdateCart = (handler: () => void) => {
     const btnUpdate = getElementById("btn-update-cart");
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
@@ -118,8 +139,8 @@ export default class CartView {
     }
   };
 
-  bindCloseModal = (btnReturn, modal) => {
-    const closeModal = getElementById(btnReturn);
+  bindCloseModal = (btnReturn:string, modal:HTMLElement) => {
+    const closeModal = getElementById(btnReturn) as HTMLElement;
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
     });
@@ -133,12 +154,14 @@ export default class CartView {
     this.bindCloseModal("btn-close-cart", this.modalCart);
   };
 
-  bindCheckoutCart = (handler) => {
+  bindCheckoutCart = (handler: () => void) => {
     const btnCheckout = getElementById("btn-checkout");
-    btnCheckout.addEventListener("click", () => {
-      this.modalCart.style.display = "none";
-      this.modalCheckout.style.display = "block";
-      handler();
-    });
+    if (btnCheckout) {
+      btnCheckout.addEventListener("click", () => {
+        this.modalCart.style.display = "none";
+        this.modalCheckout.style.display = "block";
+        handler();
+      });
+    }
   };
 }
