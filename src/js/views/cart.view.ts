@@ -57,26 +57,28 @@ export default class CartView {
       const target = e.target as HTMLElement;
       const dataType =
         target.getAttribute("data-type") ||
-        target.parentNode?.getAttribute("data-type");
+        (target.parentNode as Element)?.getAttribute("data-type");
       const dataId =
         target.getAttribute("data-id") ||
-        target.parentNode?.getAttribute("data-id");
+        (target.parentNode as Element)?.getAttribute("data-id");
 
-      switch (dataType) {
-        case "minus":
-          this.handleChangeQuantity(cartTableBody, "minus", dataId);
-          break;
+      if (dataType && dataId) {
+        switch (dataType) {
+          case "minus":
+            this.handleChangeQuantity(cartTableBody, "minus", dataId);
+            break;
 
-        case "plus":
-          this.handleChangeQuantity(cartTableBody, "plus", dataId);
-          break;
+          case "plus":
+            this.handleChangeQuantity(cartTableBody, "plus", dataId);
+            break;
 
-        case "remove":
-          this.bindHiddenProduct(dataId);
-          break;
+          case "remove":
+            this.bindHiddenProduct(dataId);
+            break;
 
-        default:
-          break;
+          default:
+            break;
+        }
       }
     });
   };
@@ -91,13 +93,15 @@ export default class CartView {
     ) as HTMLInputElement;
     switch (type) {
       case "plus":
-        inputQuantity.value && parseInt(inputQuantity.value + 1);
+        inputQuantity.value = (parseInt(inputQuantity.value) + 1).toString();
         break;
 
       case "minus":
-        inputQuantity.value <= 1
-          ? (inputQuantity.value = 1)
-          : inputQuantity.value--;
+        parseInt(inputQuantity.value) <= 1
+          ? (inputQuantity.value = "1")
+          : (inputQuantity.value = (
+              parseInt(inputQuantity.value) - 1
+            ).toString());
         break;
     }
   };
@@ -113,33 +117,40 @@ export default class CartView {
     });
   };
 
-  bindUpdateCart = (handler: () => void) => {
-    const btnUpdate = getElementById("btn-update-cart");
+  bindUpdateCart = (
+    handler: (
+      updateItems: { id: string; quantity: number }[],
+      deletedIds: string[]
+    ) => void
+  ) => {
+    const btnUpdate = document.getElementById("btn-update-cart");
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
         const productRows = document.querySelectorAll(
           ".col-tbody[marked-deleted=true]"
         );
-        const deletedIds = Array.from(productRows).map((productRow) =>
-          productRow.getAttribute("data-id")
+        const deletedIds = Array.from(productRows).map(
+          (productRow) => productRow.getAttribute("data-id") as string
         );
 
-        const inputQuantity = querySelectorAll(
+        const inputQuantity = document.querySelectorAll(
           ".col-tbody:not([marked-deleted=true]) .input-quantity"
         );
-        const updateItems = [];
-        inputQuantity.forEach((input) =>
+        const updateItems: { id: string; quantity: number }[] = [];
+        inputQuantity.forEach((input) => {
+          const inputElement = input as HTMLInputElement;
           updateItems.push({
-            id: input.dataset.id,
-            quantity: parseInt(input.value),
-          })
-        );
+            id: inputElement.dataset.id as string,
+            quantity: parseInt(inputElement.value),
+          });
+        });
+
         handler(updateItems, deletedIds);
       });
     }
   };
 
-  bindCloseModal = (btnReturn:string, modal:HTMLElement) => {
+  bindCloseModal = (btnReturn: string, modal: HTMLElement) => {
     const closeModal = getElementById(btnReturn) as HTMLElement;
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
