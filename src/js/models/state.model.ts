@@ -12,7 +12,9 @@ export default class StateModel {
     return this.state;
   };
 
-  getStateByCountry = (countryId: number) => {
-    return this.state.filter((state) => state.countryId == countryId);
+  getStateByCountry = (countryId: string) => {
+    return this.state.filter(
+      (state) => state.countryId.toString() == countryId
+    );
   };
 }

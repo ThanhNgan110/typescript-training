@@ -2,7 +2,7 @@ import ProductEntity from "./entity/product.entity";
 import Product from "../type/product";
 
 export default class ProductModel {
-  private products: ProductEntity[] = [];
+  private products: Product[] = [];
 
   setProducts = (products: Product[]) => {
     this.products = products.map((product) => new ProductEntity(product));

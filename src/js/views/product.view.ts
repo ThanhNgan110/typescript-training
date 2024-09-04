@@ -1,6 +1,6 @@
 import { getElementById, querySelector } from "../helpers/selector";
 import { displayProduct, cartNumberBadge } from "../templates/product.template";
-import Product from "../type/product";
+import { Product } from "../type/product";
 
 export default class ProductView {
   private cardBlock: Element | null;

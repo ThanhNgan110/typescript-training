@@ -1,5 +1,5 @@
 import CartEntity from "./entity/cart.entity";
-import Product from "../type/product";
+import { Product } from "../type/product";
 
 export default class CartModel {
   private products: Product[] = [];
@@ -20,7 +20,6 @@ export default class CartModel {
     return this.getProductById(id);
   };
 
-  // Method to calculate the total product amount and price
   totalProductAndPrice(products: Product[]): {
     product: Product[];
     total: string;

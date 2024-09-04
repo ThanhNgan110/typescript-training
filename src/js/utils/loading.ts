@@ -1,12 +1,18 @@
 import { querySelector } from "../helpers/selector";
-let loader = querySelector(".loading");
+let loader: Element | null = querySelector(".loading");
 
-const displayLoading = () => {
-  loader.style.display = 'block';
+const displayLoading = (): { error?: string } | void => {
+  if (!loader) {
+    return { error: "Element loader not found" };
+  }
+  (loader as HTMLElement).style.display = "block";
 };
 
 const hideLoading = () => {
-  loader.style.display = 'none';
+  if (!loader) {
+    return { error: "Element loader not found" };
+  }
+  (loader as HTMLElement).style.display = "none";
 };
 
 export { displayLoading, hideLoading };

@@ -1,6 +1,8 @@
 import { querySelector, getElementById } from "../helpers/selector";
 import { orderSummary } from "../templates/checkout.template";
-import Product from "../type/product";
+import Order from "../type/order";
+import { Product } from "../type/product";
+import State from "../type/state";
 
 export default class CheckoutView {
   wrapperCheckout: HTMLElement;
@@ -14,7 +16,7 @@ export default class CheckoutView {
   };
 
   setDefaultCountry = (
-    handler: (data: { countrySelectValue: string }) => void,
+    handler: (selectCountry: string) => void,
     countries: number[]
   ) => {
     const countrySelect: HTMLElement | null =
@@ -26,7 +28,7 @@ export default class CheckoutView {
     if (!selectElement.value) {
       selectElement.value = countries[0].toString();
     }
-    handler({ countrySelectValue: selectElement.value });
+    handler(selectElement.value);
   };
 
   bindEventChangeCountry = (
@@ -66,7 +68,7 @@ export default class CheckoutView {
     this.handleDataDropdown(countries, "country");
   };
 
-  handleRenderStates = (states: []) => {
+  handleRenderStates = (states: State[]) => {
     this.handleDataDropdown(states, "states");
   };
 
@@ -134,7 +136,7 @@ export default class CheckoutView {
   };
 
   bindChangeCheckoutForm = (
-    handler: (data: { [key: string]: string }, name: string) => void
+    handler: (data: Partial<Order>, fieldName: string) => void
   ): { error?: string } | void => {
     const form: HTMLElement | null = getElementById("form-checkout");
     if (!form) {
@@ -144,6 +146,8 @@ export default class CheckoutView {
       input.addEventListener("input", () => {
         if (input.tagName.toLowerCase() !== "select") {
           const inputElement = input as HTMLInputElement;
+          console.log("input", inputElement.name);
+
           handler(
             { [inputElement.name]: inputElement.value },
             inputElement.name

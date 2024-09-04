@@ -7,7 +7,7 @@ export default class OrderModel {
   constructor(orderData: Order) {
     this.orderEntity = orderData;
   }
-
+  
   setOrder = (orderData: Order) => {
     this.orderEntity = new OrderEntity(orderData);
   };

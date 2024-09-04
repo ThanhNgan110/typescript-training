@@ -1,6 +1,4 @@
-import Cart from "./cart";
-
-interface Product {
+export interface Product {
   id: string;
   name: string;
   price: number;
@@ -8,8 +6,6 @@ interface Product {
   imgURL: string;
 }
 
-interface Product extends Cart {
+export interface Cart extends Product {
   cartId: string;
 }
-
-export default Product;

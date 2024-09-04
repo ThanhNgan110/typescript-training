@@ -12,8 +12,22 @@ import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
 import CountryService from "../services/country.service";
 import StateService from "../services/state.service";
+import { Product } from "../type/product";
+import Order from "../type/order";
 
 export default class ProductController {
+  private productModel: ProductModel;
+  private cartModel: CartModel;
+  private stateModel: StateModel;
+  private orderModel: OrderModel;
+  private productView: ProductView;
+  private cartView: CartView;
+  private checkoutView: CheckoutView;
+  private productService: ProductService;
+  private cartItemService: CartItemService;
+  private countryService: CountryService;
+  private stateService: StateService;
+
   constructor() {
     this.productModel = new ProductModel();
     this.cartModel = new CartModel();
@@ -35,15 +49,17 @@ export default class ProductController {
     this.handleRenderProductsGrid();
     this.handleRenderCart();
     this.cartView.bindShowModal(this.handleRenderCart);
-  }
+  };
 
   handleRenderCart = async () => {
-    const products = await this.cartItemService.getAllProductsFromCart();
+    const products: Product[] =
+      await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
+
     this.cartView.renderCart({
       products: this.cartModel.getCart(),
       handleUpdateCart: this.handleUpdateCart,
-      handleRenderCheckout: this.handleRenderCheckout
+      handleRenderCheckout: this.handleRenderCheckout,
     });
     this.productView.displayTotalProductAndPrice(
       this.cartModel.totalProductAndPrice(products)
@@ -59,18 +75,20 @@ export default class ProductController {
     hideLoading();
   };
 
-  handleSearchProducts = async (productName) => {
+  handleSearchProducts = async (productName: string) => {
     const products = await this.productService.getAllProducts();
     this.productModel.setProducts(products);
     const result = this.productModel.searchProductByName(productName);
-    this.productView.displayMessage(
-      result ? "" : ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
-    );
-    this.productView.renderProductGrid(result);
+    if (!result) {
+      this.productView.displayMessage(
+        ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
+      );
+    }
+    this.productView.renderProductGrid(result || []);
     this.productView.bindAddProducts(this.handleAddProduct);
   };
 
-  handleAddProduct = async (productId) => {
+  handleAddProduct = async (productId: string) => {
     try {
       displayLoading();
       const products = this.cartModel.getCart();
@@ -86,7 +104,7 @@ export default class ProductController {
           amount: existingProduct.amount + 1,
         });
       } else {
-        await this.cartItemService.addProductToCart(product);
+        product && (await this.cartItemService.addProductToCart(product));
       }
 
       hideLoading();
@@ -97,7 +115,7 @@ export default class ProductController {
     }
   };
 
-  handleDeleteCartItem = async (deletedIds) => {
+  handleDeleteCartItem = async (deletedIds: string[]) => {
     const promises = deletedIds.map((deleteId) =>
       this.cartItemService.deleteProductFromCart(deleteId)
     );
@@ -105,7 +123,9 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateCartItem = async (updateItems) => {
+  handleUpdateCartItem = async (
+    updateItems: { id: string; quantity: number }[]
+  ) => {
     const promises = updateItems.map((item) =>
       this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
     );
@@ -113,7 +133,7 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateCart = async (quantities, deletedIds) => {
+  handleUpdateCart = async (quantities: [], deletedIds: string[]) => {
     try {
       displayLoading();
       await Promise.all([
@@ -122,16 +142,19 @@ export default class ProductController {
       ]);
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
-     await this.handleRenderCart();
+      await this.handleRenderCart();
     } catch (error) {
       showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
     }
   };
 
-  handleGetStates = async (countryId) => {
+  handleGetStates = async (countryId: string) => {
     const states = await this.stateService.getState();
     this.stateModel.setState(states);
     const listState = this.stateModel.getStateByCountry(countryId);
+    if (!listState) {
+      return { error: "Not found country id" };
+    }
     this.checkoutView.handleRenderStates(listState);
   };
 
@@ -148,7 +171,11 @@ export default class ProductController {
     hideLoading();
   };
 
-  handleChangeCheckoutForm = (fieldObject, fieldName) => {
+  handleChangeCheckoutForm = (
+    fieldObject: Partial<Order>,
+    fieldName: string
+  ) => {
+    console.log("abc", fieldObject);
     this.orderModel.setOrder(fieldObject);
     const fieldErrorMess = this.orderModel.validate(fieldObject);
     const formErrorMess = { [fieldName]: fieldErrorMess };
