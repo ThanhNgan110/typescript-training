@@ -1,5 +1,5 @@
 import { ALERT_MESSAGE } from "../constants/message";
-import Product from "../type/product";
+import { Product } from "../type/product";
 
 export const cartSum = (products: Product[]) => {
   let total = 0;

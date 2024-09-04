@@ -6,6 +6,7 @@ import {
 import { displayCart, cartSum } from "../templates/cart.template";
 import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
+import { Cart } from "../type/product";
 
 export default class CartView {
   wrapperCart: Element | null;
@@ -21,9 +22,16 @@ export default class CartView {
   }
 
   renderCart = ({
-    products = [],
-    handleUpdateCart = Function,
-    handleRenderCheckout = Function,
+    products,
+    handleUpdateCart,
+    handleRenderCheckout,
+  }: {
+    products: Cart[];
+    handleUpdateCart: (
+      quantities: { id: string; quantity: number }[],
+      deletedIds: string[]
+    ) => Promise<void>;
+    handleRenderCheckout: () => void;
   }) => {
     cartSum(products);
     if (this.wrapperCart) {
@@ -33,7 +41,10 @@ export default class CartView {
   };
 
   bindControlsEvents = (
-    handleUpdateCart: () => void,
+    handleUpdateCart: (
+      quantities: { id: string; quantity: number }[],
+      deletedIds: string[]
+    ) => Promise<void>,
     handleRenderCheckout: () => void
   ) => {
     this.bindChangeActions();

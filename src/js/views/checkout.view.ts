@@ -146,8 +146,6 @@ export default class CheckoutView {
       input.addEventListener("input", () => {
         if (input.tagName.toLowerCase() !== "select") {
           const inputElement = input as HTMLInputElement;
-          console.log("input", inputElement.name);
-
           handler(
             { [inputElement.name]: inputElement.value },
             inputElement.name

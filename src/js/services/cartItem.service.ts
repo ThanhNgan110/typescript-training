@@ -1,6 +1,6 @@
 import { API } from "../constants/config";
 import ApiService from "./api.service";
-import { Product } from "../type/product";
+import { Product, Cart } from "../type/product";
 
 export default class CartItemService {
   private apiService: ApiService;
@@ -9,7 +9,7 @@ export default class CartItemService {
     this.apiService = new ApiService(API.URL_API, API.END_POINT_CARTITEM);
   }
 
-  getAllProductsFromCart = async (): Promise<Product[]> => {
+  getAllProductsFromCart = async (): Promise<Cart[]> => {
     return await this.apiService.get();
   };
 

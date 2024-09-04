@@ -12,7 +12,7 @@ import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
 import CountryService from "../services/country.service";
 import StateService from "../services/state.service";
-import { Product } from "../type/product";
+import { Product, Cart } from "../type/product";
 import Order from "../type/order";
 
 export default class ProductController {
@@ -52,7 +52,9 @@ export default class ProductController {
   };
 
   handleRenderCart = async () => {
-    const products: Product[] = await this.cartItemService.getAllProductsFromCart();
+    const products: Cart[] =
+      await this.cartItemService.getAllProductsFromCart();
+
     this.cartModel.setCart(products);
 
     this.cartView.renderCart({
@@ -132,7 +134,10 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateCart = async (quantities: [], deletedIds: string[]) => {
+  handleUpdateCart = async (
+    quantities: { id: string; quantity: number }[],
+    deletedIds: string[]
+  ) => {
     try {
       displayLoading();
       await Promise.all([

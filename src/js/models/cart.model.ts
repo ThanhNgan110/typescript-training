@@ -8,7 +8,7 @@ export default class CartModel {
     this.products = products.map((item) => new CartEntity(item));
   };
 
-  getCart = () => {
+  getCart = (): Cart[] => {
     return this.products;
   };
 
