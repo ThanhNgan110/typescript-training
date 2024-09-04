@@ -1,5 +1,5 @@
 import ProductEntity from "./entity/product.entity";
-import Product from "../type/product";
+import { Product } from "../type/product";
 
 export default class ProductModel {
   private products: Product[] = [];

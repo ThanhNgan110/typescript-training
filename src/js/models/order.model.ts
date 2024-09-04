@@ -7,12 +7,16 @@ export default class OrderModel {
   constructor(orderData: Order) {
     this.orderEntity = orderData;
   }
-  
+
   setOrder = (orderData: Order) => {
     this.orderEntity = new OrderEntity(orderData);
   };
 
-  validate = (inputValue: Order) => {
+  validate = (inputValue: Partial<Order>) => {
     return this.orderEntity.validate(inputValue);
+  };
+
+  getOrder = () => {
+    return this.orderEntity;
   };
 }

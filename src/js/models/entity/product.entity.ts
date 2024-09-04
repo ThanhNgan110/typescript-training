@@ -1,4 +1,4 @@
-import Product from "../../type/product";
+import { Product } from "../../type/product";
 
 /** Class representing a product. */
 export default class ProductEntity {

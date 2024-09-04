@@ -1,4 +1,4 @@
-import Cart from "../../type/cart";
+import { Cart} from "../../type/product";
 
 export default class CartEntity {
   id: string;

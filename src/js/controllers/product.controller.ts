@@ -52,8 +52,7 @@ export default class ProductController {
   };
 
   handleRenderCart = async () => {
-    const products: Product[] =
-      await this.cartItemService.getAllProductsFromCart();
+    const products: Product[] = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
 
     this.cartView.renderCart({
@@ -175,8 +174,12 @@ export default class ProductController {
     fieldObject: Partial<Order>,
     fieldName: string
   ) => {
-    console.log("abc", fieldObject);
-    this.orderModel.setOrder(fieldObject);
+    const updatedFieldOrder = {
+      ...this.orderModel.getOrder(),
+      ...fieldObject,
+    };
+    // this.orderModel.setOrder(fieldObject);
+    this.orderModel.setOrder(updatedFieldOrder);
     const fieldErrorMess = this.orderModel.validate(fieldObject);
     const formErrorMess = { [fieldName]: fieldErrorMess };
     this.checkoutView.updateFormUi(formErrorMess);

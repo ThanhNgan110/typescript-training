@@ -1,10 +1,10 @@
 import CartEntity from "./entity/cart.entity";
-import { Product } from "../type/product";
+import { Cart } from "../type/product";
 
 export default class CartModel {
-  private products: Product[] = [];
+  private products: Cart[] = [];
 
-  setCart = (products: Product[]) => {
+  setCart = (products: Cart[]) => {
     this.products = products.map((item) => new CartEntity(item));
   };
 
@@ -20,8 +20,8 @@ export default class CartModel {
     return this.getProductById(id);
   };
 
-  totalProductAndPrice(products: Product[]): {
-    product: Product[];
+  totalProductAndPrice(products: Cart[]): {
+    product: Cart[];
     total: string;
   } {
     let total = 0;
