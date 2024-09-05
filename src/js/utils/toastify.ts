@@ -1,15 +1,15 @@
 import Toastify from "toastify-js";
-import 'toastify-js/src/toastify.css';
+import "toastify-js/src/toastify.css";
 
-const showSuccess = ({text}) => {
+const showSuccess = ({ text }: { text: string }) => {
   showToastify(text, "toastify-success");
 };
 
-const showError = ({text}) => {
+const showError = ({ text }: { text: string }) => {
   showToastify(text, "toastify-danger");
 };
 
-const showToastify = (text, state, duration = 2000) => {
+const showToastify = (text: string, state: string, duration = 2000) => {
   Toastify({
     text: text,
     duration: duration,
