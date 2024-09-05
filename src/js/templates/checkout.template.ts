@@ -1,5 +1,5 @@
 import { cartSum } from "./cart.template";
-import Product from "../type/product";
+import { Product } from "../type/product";
 
 let total = "";
 

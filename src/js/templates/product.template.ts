@@ -1,4 +1,4 @@
-import Product from "../type/product";
+import { Product } from "../type/product";
 
 export const displayProduct = (products: Product[]) => {
   let contentProduct = "";
