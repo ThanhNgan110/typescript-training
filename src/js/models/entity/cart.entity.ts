@@ -1,6 +1,6 @@
-import { Cart} from "../../type/product";
+import { Cart } from "../../type/product";
 
-export default class CartEntity {
+export default class CartEntity implements Cart {
   id: string;
   cartId: string;
   name: string;

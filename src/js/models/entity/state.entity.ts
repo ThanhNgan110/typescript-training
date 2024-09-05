@@ -1,6 +1,6 @@
 import State from "../../type/state";
 
-export default class StateEntity {
+export default class StateEntity implements State {
   id: string;
   countryId: number;
   name: string;

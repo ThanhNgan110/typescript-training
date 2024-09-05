@@ -22,6 +22,7 @@ export const displayCart = (products: Product[]): string => {
     product.forEach((item) => {
       contentCart += cartTemplate(item);
     });
+    
   } else {
     contentCart = `<tr><td><p class="text-empty">${ALERT_MESSAGE.CART_EMPTY_HEADING}</p></td></tr>`;
   }

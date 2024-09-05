@@ -8,7 +8,7 @@ import {
 
 import Order from "../../type/order";
 
-export default class OrderEntity {
+export default class OrderEntity implements Order {
   firstName: string;
   lastName: string;
   companyName: string;
@@ -29,7 +29,7 @@ export default class OrderEntity {
     this.note = data.note;
   }
 
-  validate = (orderEntity: Order) => {
+  validate = (orderEntity: Partial<Order>) => {
     let formError = {};
     const key = Object.keys(orderEntity)[0];
     const value = orderEntity[key]; // Add type assertion here
