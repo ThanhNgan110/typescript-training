@@ -1,18 +1,24 @@
 import { ALERT_MESSAGE } from "../constants/message";
+
 import { showSuccess, showError } from "../utils/toastify";
+
 import { displayLoading, hideLoading } from "../utils/loading";
+
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
 import StateModel from "../models/state.model";
 import OrderModel from "../models/order.model";
+
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
 import CheckoutView from "../views/checkout.view";
+
 import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
 import CountryService from "../services/country.service";
 import StateService from "../services/state.service";
-import { Product, Cart } from "../type/product";
+
+import { Cart } from "../type/product";
 import Order from "../type/order";
 
 export default class ProductController {
@@ -183,7 +189,6 @@ export default class ProductController {
       ...this.orderModel.getOrder(),
       ...fieldObject,
     };
-    // this.orderModel.setOrder(fieldObject);
     this.orderModel.setOrder(updatedFieldOrder);
     const fieldErrorMess = this.orderModel.validate(fieldObject);
     const formErrorMess = { [fieldName]: fieldErrorMess };
