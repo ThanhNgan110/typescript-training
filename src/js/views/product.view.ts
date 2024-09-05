@@ -1,5 +1,7 @@
 import { getElementById, querySelector } from "../helpers/selector";
+
 import { displayProduct, cartNumberBadge } from "../templates/product.template";
+
 import { Product } from "../type/product";
 
 export default class ProductView {
@@ -21,6 +23,7 @@ export default class ProductView {
     if (!this.cardBlock) {
       return { error: "Element cardBlock not found" };
     }
+
     this.cardBlock.innerHTML = displayProduct(products);
   };
 
@@ -30,6 +33,7 @@ export default class ProductView {
     if (!this.blockCart) {
       return { error: "Element blockCart not found" };
     }
+
     this.blockCart.innerHTML = cartNumberBadge(products);
   };
 
@@ -39,6 +43,7 @@ export default class ProductView {
     if (!this.searchForm) {
       return { error: "Element searchForm not found" };
     }
+
     this.searchForm.addEventListener("click", (e) => {
       e.preventDefault();
       handler((this.inputSearch as HTMLInputElement)?.value);
@@ -49,6 +54,7 @@ export default class ProductView {
     if (!this.messageContent) {
       return { error: "Element not found" };
     }
+
     this.messageContent.innerHTML = message;
   };
 
@@ -56,12 +62,15 @@ export default class ProductView {
     handler: (productId: string) => void
   ): { error?: string } | void => {
     const btnCards = document.querySelectorAll(".btn-card");
+
     btnCards.forEach((btnCard) => {
       btnCard.addEventListener("click", () => {
         let productId = (btnCard as HTMLElement).dataset.id;
+
         if (!productId) {
           return { error: "Product id not found" };
         }
+
         handler(productId);
       });
     });

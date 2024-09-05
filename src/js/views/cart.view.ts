@@ -3,9 +3,13 @@ import {
   querySelectorAll,
   getElementById,
 } from "../helpers/selector";
+
 import { displayCart, cartSum } from "../templates/cart.template";
+
 import { showSuccess } from "../utils/toastify";
+
 import { ALERT_MESSAGE } from "../constants/message";
+
 import { Cart } from "../type/product";
 
 export default class CartView {
@@ -34,9 +38,11 @@ export default class CartView {
     handleRenderCheckout: () => void;
   }) => {
     cartSum(products);
+
     if (this.wrapperCart) {
       this.wrapperCart.innerHTML = displayCart(products);
     }
+
     this.bindControlsEvents(handleUpdateCart, handleRenderCheckout);
   };
 
@@ -64,6 +70,7 @@ export default class CartView {
 
   bindChangeActions = () => {
     const cartTableBody = getElementById("cart-table-body") as HTMLElement;
+
     cartTableBody.addEventListener("click", (e: Event) => {
       const target = e.target as HTMLElement;
       const dataType =
@@ -102,6 +109,7 @@ export default class CartView {
     const inputQuantity = cartTableBody.querySelector(
       `input[data-id="${dataId}"]`
     ) as HTMLInputElement;
+
     switch (type) {
       case "plus":
         inputQuantity.value = (parseInt(inputQuantity.value) + 1).toString();
@@ -119,6 +127,7 @@ export default class CartView {
 
   bindHiddenProduct = (productId: string) => {
     const productRows = querySelectorAll(".col-tbody");
+
     productRows.forEach((productRow) => {
       if (productRow.getAttribute("data-id") === productId) {
         productRow.classList.add("marked-deleted");
@@ -135,6 +144,7 @@ export default class CartView {
     ) => void
   ) => {
     const btnUpdate = document.getElementById("btn-update-cart");
+
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
         const productRows = document.querySelectorAll(
@@ -162,7 +172,12 @@ export default class CartView {
   };
 
   bindCloseModal = (btnReturn: string, modal: HTMLElement) => {
-    const closeModal = getElementById(btnReturn) as HTMLElement;
+    const closeModal: HTMLElement | null = getElementById(btnReturn);
+
+    if (!closeModal) {
+      return { error: "Not found element" };
+    }
+
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
     });
@@ -178,6 +193,7 @@ export default class CartView {
 
   bindCheckoutCart = (handler: () => void) => {
     const btnCheckout = getElementById("btn-checkout");
+
     if (btnCheckout) {
       btnCheckout.addEventListener("click", () => {
         this.modalCart.style.display = "none";
