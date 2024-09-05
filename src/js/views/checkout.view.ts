@@ -1,17 +1,22 @@
 import { querySelector, getElementById } from "../helpers/selector";
+
 import { orderSummary } from "../templates/checkout.template";
+
 import Order from "../type/order";
 import { Product } from "../type/product";
 import State from "../type/state";
 
 export default class CheckoutView {
-  wrapperCheckout: HTMLElement;
+  wrapperCheckout: Element | null;
 
   constructor() {
-    this.wrapperCheckout = querySelector(".wrapper-checkout") as HTMLElement;
+    this.wrapperCheckout = querySelector(".wrapper-checkout");
   }
 
   renderFormCheckout = (products: Product[]) => {
+    if (!this.wrapperCheckout) {
+      return { error: "Not found element" };
+    }
     this.wrapperCheckout.innerHTML = orderSummary(products);
   };
 
@@ -21,13 +26,16 @@ export default class CheckoutView {
   ) => {
     const countrySelect: HTMLElement | null =
       document.getElementById("country");
+
     if (!countrySelect) {
       throw new Error("Element not found");
     }
+
     const selectElement = countrySelect as HTMLSelectElement;
     if (!selectElement.value) {
       selectElement.value = countries[0].toString();
     }
+
     handler(selectElement.value);
   };
 
@@ -35,14 +43,17 @@ export default class CheckoutView {
     handler: (selectedCountryId: string) => void
   ): { error?: string } | void => {
     const countrySelect: HTMLElement | null = getElementById("country");
+
     if (!countrySelect) {
       return { error: "Element not found" };
     }
+
     const selectElement = countrySelect as HTMLSelectElement;
     countrySelect.addEventListener("change", () => {
       const selectedCountryId = selectElement.value;
       handler(selectedCountryId);
     });
+
     return;
   };
 
@@ -51,9 +62,11 @@ export default class CheckoutView {
     selectId: string
   ): { error?: string } | void => {
     const selectElement: HTMLElement | null = getElementById(selectId);
+
     if (!selectElement) {
       return { error: "Element not found" };
     }
+
     selectElement.innerHTML = "";
     data?.forEach((item) => {
       const option = document.createElement("option");
@@ -61,6 +74,7 @@ export default class CheckoutView {
       option.text = item.name;
       selectElement.appendChild(option);
     });
+
     return;
   };
 
@@ -90,6 +104,7 @@ export default class CheckoutView {
         return false;
       }
     }
+
     return true;
   };
 
@@ -109,9 +124,11 @@ export default class CheckoutView {
     }
 
     let allFieldsFilled = true;
+
     if (!form) {
       return { error: "Element form not found" };
     }
+
     for (let input of (form as HTMLFormElement).elements) {
       if (
         (input as HTMLInputElement).type !== "submit" &&
@@ -139,9 +156,11 @@ export default class CheckoutView {
     handler: (data: Partial<Order>, fieldName: string) => void
   ): { error?: string } | void => {
     const form: HTMLElement | null = getElementById("form-checkout");
+
     if (!form) {
       return { error: "Element not found" };
     }
+
     for (let input of (form as HTMLFormElement).elements) {
       input.addEventListener("input", () => {
         if (input.tagName.toLowerCase() !== "select") {
