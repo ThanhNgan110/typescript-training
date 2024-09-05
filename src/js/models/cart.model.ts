@@ -20,10 +20,7 @@ export default class CartModel {
     return this.getProductById(id);
   };
 
-  totalProductAndPrice(products: Cart[]): {
-    product: Cart[];
-    total: string;
-  } {
+  totalProductAndPrice(products: Cart[]) {
     let total = 0;
     if (products) {
       products.forEach((item) => {
