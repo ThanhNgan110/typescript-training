@@ -2,26 +2,25 @@ import { API } from "../constants/config";
 import ApiService from "./api.service";
 import { Product, Cart } from "../type/product";
 
-export default class CartItemService {
-  private apiService: ApiService;
+export default class CartItemService extends ApiService {
 
   constructor() {
-    this.apiService = new ApiService(API.URL_API, API.END_POINT_CARTITEM);
+    super(API.URL_API, API.END_POINT_CARTITEM);
   }
 
   getAllProductsFromCart = async (): Promise<Cart[]> => {
-    return await this.apiService.get();
+    return await this.get();
   };
 
   addProductToCart = async (product: Product) => {
-    await this.apiService.post(product);
+    await this.post(product);
   };
 
   updateCart = async (data: { id: string; amount: number }) => {
-    return await this.apiService.patch(data);
+    return await this.patch(data);
   };
 
   deleteProductFromCart = async (id: string) => {
-    return await this.apiService.delete(id);
+    return await this.delete(id);
   };
 }

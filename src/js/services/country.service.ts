@@ -1,14 +1,12 @@
 import { API } from "../constants/config";
 import ApiService from "./api.service";
 
-export default class CountryService {
-  private apiService: ApiService;
-
+export default class CountryService extends ApiService {
   constructor() {
-    this.apiService = new ApiService(API.URL_API, API.END_POINT_COUNTRY);
+    super(API.URL_API, API.END_POINT_COUNTRY);
   }
 
   getCountry = async () => {
-    return await this.apiService.get();
+    return await this.get();
   };
 }
