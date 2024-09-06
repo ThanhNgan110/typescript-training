@@ -11,6 +11,7 @@ import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 
 import { Cart } from "../type/product";
+import { quantities } from "../type/quantities";
 
 export default class CartView {
   wrapperCart: Element | null;
@@ -48,7 +49,7 @@ export default class CartView {
 
   bindControlsEvents = (
     handleUpdateCart: (
-      quantities: { id: string; quantity: number }[],
+      quantities: quantities,
       deletedIds: string[]
     ) => Promise<void>,
     handleRenderCheckout: () => void
@@ -139,7 +140,7 @@ export default class CartView {
 
   bindUpdateCart = (
     handler: (
-      updateItems: { id: string; quantity: number }[],
+      updateItems: quantities,
       deletedIds: string[]
     ) => void
   ) => {

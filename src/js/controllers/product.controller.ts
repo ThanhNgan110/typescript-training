@@ -20,6 +20,7 @@ import StateService from "../services/state.service";
 
 import { Cart } from "../type/product";
 import Order from "../type/order";
+import { quantities } from "../type/quantities";
 
 export default class ProductController {
   private productModel: ProductModel;
@@ -130,9 +131,7 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateCartItem = async (
-    updateItems: { id: string; quantity: number }[]
-  ) => {
+  handleUpdateCartItem = async (updateItems: quantities) => {
     const promises = updateItems.map((item) =>
       this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
     );
@@ -140,10 +139,7 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateCart = async (
-    quantities: { id: string; quantity: number }[],
-    deletedIds: string[]
-  ) => {
+  handleUpdateCart = async (quantities: quantities, deletedIds: string[]) => {
     try {
       displayLoading();
       await Promise.all([
