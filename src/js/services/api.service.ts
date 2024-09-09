@@ -7,7 +7,7 @@ export default class ApiService<T> {
     this.endPoint = endPoint;
   }
 
-  async get(): Promise<T | undefined> {
+  async get(): Promise<T | null> {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}`, {
         method: "GET",
@@ -16,14 +16,16 @@ export default class ApiService<T> {
       if (res.ok) {
         return await res.json();
       }
+      return null;
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Get data fail ${error.message}`);
       }
     }
+    return null;
   }
 
-  async post(data: T): Promise<T | undefined> {
+  async post(data: T): Promise<T | null> {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}`, {
         method: "POST",
@@ -38,9 +40,10 @@ export default class ApiService<T> {
         throw new Error(`Post data fail ${error.message}`);
       }
     }
+    return null;
   }
 
-  async patch(payload: Partial<T> & { id: string }): Promise<T | undefined> {
+  async patch(payload: Partial<T> & { id: string }): Promise<T | null> {
     try {
       const res = await fetch(
         `${this.baseURL}/${this.endPoint}/${payload.id}`,
@@ -58,9 +61,10 @@ export default class ApiService<T> {
         throw new Error(`Path data fail ${error.message}`);
       }
     }
+    return null;
   }
 
-  async delete(payload: string): Promise<T | undefined> {
+  async delete(payload: string): Promise<T | null> {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}/${payload}`, {
         method: "DELETE",
@@ -73,5 +77,6 @@ export default class ApiService<T> {
         throw new Error(`Delete data fail ${error.message}`);
       }
     }
+    return null;
   }
 }
