@@ -1,4 +1,4 @@
-export default class ApiService {
+export default class ApiService<T> {
   private baseURL: string;
   private endPoint: string;
 
@@ -7,7 +7,7 @@ export default class ApiService {
     this.endPoint = endPoint;
   }
 
-  async get() {
+  async get(): Promise<T | undefined> {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}`, {
         method: "GET",
@@ -23,7 +23,7 @@ export default class ApiService {
     }
   }
 
-  async post(data: object) {
+  async post(data: T): Promise<T | undefined> {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}`, {
         method: "POST",
@@ -40,7 +40,7 @@ export default class ApiService {
     }
   }
 
-  async patch(payload: { id: string }) {
+  async patch(payload: Partial<T> & { id: string }): Promise<T | undefined> {
     try {
       const res = await fetch(
         `${this.baseURL}/${this.endPoint}/${payload.id}`,
@@ -60,7 +60,7 @@ export default class ApiService {
     }
   }
 
-  async delete(payload: string) {
+  async delete(payload: string): Promise<T | undefined> {
     try {
       const res = await fetch(`${this.baseURL}/${this.endPoint}/${payload}`, {
         method: "DELETE",
