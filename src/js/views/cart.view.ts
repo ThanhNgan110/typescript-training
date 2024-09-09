@@ -33,12 +33,12 @@ export default class CartView {
   }: {
     products: Cart[];
     handleUpdateCart: (
-      quantities: { id: string; quantity: number }[],
+      quantities: quantities,
       deletedIds: string[]
     ) => Promise<void>;
     handleRenderCheckout: () => void;
   }) => {
-    cartSum(products);
+    // cartSum(products);
 
     if (this.wrapperCart) {
       this.wrapperCart.innerHTML = displayCart(products);
@@ -139,10 +139,7 @@ export default class CartView {
   };
 
   bindUpdateCart = (
-    handler: (
-      updateItems: quantities,
-      deletedIds: string[]
-    ) => void
+    handler: (updateItems: quantities, deletedIds: string[]) => void
   ) => {
     const btnUpdate = document.getElementById("btn-update-cart");
 
