@@ -7,5 +7,5 @@ export interface Product {
 }
 
 export interface Cart extends Product {
-  cartId?: string;
+  cartId?: string ;
 }
