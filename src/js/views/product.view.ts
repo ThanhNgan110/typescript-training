@@ -27,9 +27,10 @@ export default class ProductView {
     this.cardBlock.innerHTML = displayProduct(products);
   };
 
-  displayTotalProductAndPrice = (
-    products: object
-  ): { error?: string } | void => {
+  displayTotalProductAndPrice = (products: {
+    products: Product[];
+    total: 0;
+  }): { error?: string } | void => {
     if (!this.blockCart) {
       return { error: "Element blockCart not found" };
     }
