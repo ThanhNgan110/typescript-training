@@ -10,8 +10,4 @@ export default class ProductService extends ApiService<Product> {
   getAllProducts = async () => {
     return await this.get();
   };
-
-  // addProductToCart = async (product: Product) => {
-  //   await this.post(product);
-  // };
 }
