@@ -1,19 +1,18 @@
 import CartEntity from "./entity/cart.entity";
 import { Cart } from "../type/product";
+import BaseModel from "./base.model";
 
-export default class CartModel {
-  private products: Cart[] = [];
-
+export default class CartModel extends BaseModel<Cart> {
   setCart = (products: Cart[]) => {
-    this.products = products.map((item) => new CartEntity(item));
+    this.setEntities(products, CartEntity);
   };
 
   getCart = (): Cart[] => {
-    return this.products;
+    return this.getEntities();
   };
 
   getProductById = (id: string) => {
-    return this.products.find((item) => item.id === id);
+    return this.findById(id, "id");
   };
 
   checkProductIdExisting = (id: string) => {

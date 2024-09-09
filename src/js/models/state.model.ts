@@ -1,20 +1,23 @@
+import BaseModel from "./base.model";
 import StateEntity from "./entity/state.entity";
 import State from "../type/state";
 
-export default class StateModel {
-  private state: StateEntity[] = [];
-
-  setState(states: State[]): void {
-    this.state = states.map((state) => new StateEntity(state));
+export default class StateModel extends BaseModel<StateEntity> {
+  constructor() {
+    super();
   }
 
-  getState = () => {
-    return this.state;
+  setState = (states: State[]): void => {
+    this.setEntities(states, StateEntity);
   };
 
-  getStateByCountry = (countryId: string) => {
-    return this.state.filter(
-      (state) => state.countryId.toString() == countryId
+  getState = (): StateEntity[] => {
+    return this.getEntities();
+  };
+
+  getStateByCountry = (countryId: string): StateEntity[] => {
+    return this.entities.filter(
+      (state) => state.countryId.toString() === countryId
     );
   };
 }
