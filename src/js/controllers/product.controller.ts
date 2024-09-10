@@ -189,7 +189,6 @@ export default class ProductController {
     fieldObject: Partial<Order>,
     fieldName: string
   ) => {
-    console.log("fieldObject", fieldObject);
 
     this.orderModel.setOrder(fieldObject);
     const fieldErrorMess = this.orderModel.validate(fieldObject);
