@@ -1,13 +1,13 @@
 import { API } from "../constants/config";
 import ApiService from "./api.service";
-import { Countries } from "../type/countries";
+import { Country } from "../type/country";
 
-export default class CountryService extends ApiService<Countries> {
+export default class CountryService extends ApiService<Country> {
   constructor() {
     super(API.URL_API, API.END_POINT_COUNTRY);
   }
 
-  getCountry = async (): Promise<Countries[]> => {
+  getCountry = async (): Promise<Country[]> => {
     const countries = await this.get();
     return Array.isArray(countries) ? countries : [];
   };
