@@ -53,7 +53,7 @@
 - Clone source
 
 ```
-git clone https://github.com/ThanhNgan110/javascript-training
+git clone https://github.com/ThanhNgan110/typescript-training
 ```
 
 - Git checkout feature/practice
