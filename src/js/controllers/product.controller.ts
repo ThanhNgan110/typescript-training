@@ -19,7 +19,7 @@ import CountryService from "../services/country.service";
 import StateService from "../services/state.service";
 
 import Order from "../type/order";
-import { quantities } from "../type/quantities";
+import { Quantity } from "../type/quantity";
 
 export default class ProductController {
   private productModel: ProductModel;
@@ -134,7 +134,7 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateCartItem = async (updateItems: quantities) => {
+  handleUpdateCartItem = async (updateItems: Quantity[]) => {
     const promises = updateItems.map((item) =>
       this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
     );
@@ -142,7 +142,7 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateCart = async (quantities: quantities, deletedIds: string[]) => {
+  handleUpdateCart = async (quantities: Quantity[], deletedIds: string[]) => {
     try {
       displayLoading();
       await Promise.all([
@@ -189,7 +189,6 @@ export default class ProductController {
     fieldObject: Partial<Order>,
     fieldName: string
   ) => {
-
     this.orderModel.setOrder(fieldObject);
     const fieldErrorMess = this.orderModel.validate(fieldObject);
     const formErrorMess = {

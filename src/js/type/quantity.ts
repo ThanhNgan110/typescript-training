@@ -1,4 +1,4 @@
-export type quantities = {
+export type Quantity = {
   id: string;
   quantity: number;
-}[];
+};
