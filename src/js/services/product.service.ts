@@ -8,6 +8,7 @@ export default class ProductService extends ApiService<Product> {
   }
 
   getAllProducts = async () => {
-    return await this.get();
+    const products = await this.get();
+    return Array.isArray(products) ? products : [];
   };
 }

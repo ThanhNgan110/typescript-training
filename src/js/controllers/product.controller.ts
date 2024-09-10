@@ -18,7 +18,6 @@ import CartItemService from "../services/cartItem.service";
 import CountryService from "../services/country.service";
 import StateService from "../services/state.service";
 
-import { Cart } from "../type/product";
 import Order from "../type/order";
 import { quantities } from "../type/quantities";
 
@@ -59,11 +58,13 @@ export default class ProductController {
   };
 
   handleRenderCart = async () => {
-    const products: Cart[] =
-      await this.cartItemService.getAllProductsFromCart();
+    const products = await this.cartItemService.getAllProductsFromCart();
+
+    if (!products) {
+      return { error: "Product not found" };
+    }
 
     this.cartModel.setCart(products);
-
     this.cartView.renderCart({
       products: this.cartModel.getCart(),
       handleUpdateCart: this.handleUpdateCart,
@@ -87,11 +88,13 @@ export default class ProductController {
     const products = await this.productService.getAllProducts();
     this.productModel.setProducts(products);
     const result = this.productModel.searchProductByName(productName);
+
     if (!result) {
       this.productView.displayMessage(
         ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
       );
     }
+
     this.productView.renderProductGrid(result || []);
     this.productView.bindAddProducts(this.handleAddProduct);
   };
@@ -156,11 +159,11 @@ export default class ProductController {
 
   handleGetStates = async (countryId: string) => {
     const states = await this.stateService.getState();
+
     this.stateModel.setState(states);
+
     const listState = this.stateModel.getStateByCountry(countryId);
-    if (!listState) {
-      return { error: "Not found country id" };
-    }
+
     this.checkoutView.handleRenderStates(listState);
   };
 
@@ -169,7 +172,12 @@ export default class ProductController {
     const countries = await this.countryService.getCountry();
     const products = this.cartModel.getCart();
     this.checkoutView.renderFormCheckout(products);
+
+    if (!countries) {
+      this.checkoutView.handleRenderCountry([]);
+    }
     this.checkoutView.handleRenderCountry(countries);
+
     this.checkoutView.setDefaultCountry(this.handleGetStates, countries);
     this.checkoutView.bindEventChangeCountry(this.handleGetStates);
     this.cartView.bindCloseModalCheckout();
@@ -181,13 +189,14 @@ export default class ProductController {
     fieldObject: Partial<Order>,
     fieldName: string
   ) => {
-    const updatedFieldOrder = {
-      ...this.orderModel.getOrder(),
-      ...fieldObject,
-    };
-    this.orderModel.setOrder(updatedFieldOrder);
+    console.log("fieldObject", fieldObject);
+
+    this.orderModel.setOrder(fieldObject);
     const fieldErrorMess = this.orderModel.validate(fieldObject);
-    const formErrorMess = { [fieldName]: fieldErrorMess };
+    const formErrorMess = {
+      [fieldName]: typeof fieldErrorMess === "string" ? fieldErrorMess : "",
+    };
+
     this.checkoutView.updateFormUi(formErrorMess);
   };
 }

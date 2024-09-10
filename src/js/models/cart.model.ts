@@ -1,5 +1,5 @@
 import CartEntity from "./entity/cart.entity";
-import { Cart } from "../type/product";
+import { Cart, Product } from "../type/product";
 import BaseModel from "./base.model";
 
 export default class CartModel extends BaseModel<Cart> {
@@ -19,7 +19,7 @@ export default class CartModel extends BaseModel<Cart> {
     return this.getProductById(id);
   };
 
-  totalProductAndPrice(products: Cart[]) {
+  totalProductAndPrice(products: Product[]){
     let total = 0;
     if (products) {
       products.forEach((item) => {
@@ -28,8 +28,8 @@ export default class CartModel extends BaseModel<Cart> {
     }
 
     return {
-      product: products,
-      total: total.toFixed(2),
+      products: products,
+      total: parseFloat(total.toFixed(2)),
     };
   }
 }

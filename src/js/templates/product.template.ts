@@ -30,10 +30,14 @@ export const productTemplate = (product: Product) => {
   `;
 };
 
-export const cartNumberBadge = ({ product = [], total = 0 }) => {
+export const cartNumberBadge = (cartData: {
+  products: Product[];
+  total: number;
+}) => {
+  const { products, total } = cartData;
   return `
     <span class="icon icon-medium icon-cart"></span>
-    <span class="icon icon-circle">${product.length}</span>
+    <span class="icon icon-circle">${products.length}</span>
     <div class="block-total-cart">
       <p class="name-cart">Shopping cart</p>
       <p class="total-price">$${total}</p>

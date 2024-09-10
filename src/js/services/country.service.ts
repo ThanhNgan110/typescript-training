@@ -7,7 +7,8 @@ export default class CountryService extends ApiService<Countries> {
     super(API.URL_API, API.END_POINT_COUNTRY);
   }
 
-  getCountry = async () => {
-    return await this.get();
+  getCountry = async (): Promise<Countries[]> => {
+    const countries = await this.get();
+    return Array.isArray(countries) ? countries : [];
   };
 }

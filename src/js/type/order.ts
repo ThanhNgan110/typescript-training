@@ -6,8 +6,7 @@ interface Order {
   zipCode: string;
   email: string;
   phoneNumber: string;
-  note: string;
-  validate(inputValue: Partial<Order>): void;
+  note?: string;
 }
 
 export default Order;

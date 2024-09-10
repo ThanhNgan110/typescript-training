@@ -2,7 +2,7 @@ import { REGEX_PATTERNS } from "../constants/regexPatterns";
 import { LABELS } from "../constants/label";
 import { ValidateString, ValidateInteger } from "../type/validate";
 
-const validateEmpty = ({ key, value }:ValidateString ) => {
+const validateEmpty = ({ key, value } : ValidateString ) => {
   return value.trim() === "" ? `${LABELS[key]} is required` : "";
 };
 

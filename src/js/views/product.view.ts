@@ -29,8 +29,8 @@ export default class ProductView {
 
   displayTotalProductAndPrice = (products: {
     products: Product[];
-    total: 0;
-  }): { error?: string } | void => {
+    total: number;
+  }) => {
     if (!this.blockCart) {
       return { error: "Element blockCart not found" };
     }

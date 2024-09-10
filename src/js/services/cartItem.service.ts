@@ -7,8 +7,9 @@ export default class CartItemService extends ApiService<Cart> {
     super(API.URL_API, API.END_POINT_CARTITEM);
   }
 
-  getAllProductsFromCart = async () => {
-    return await this.get();
+  getAllProductsFromCart = async (): Promise<Cart[]> => {
+    const result = await this.get();
+    return Array.isArray(result) ? result : [];
   };
 
   addProductToCart = async (product: Product) => {

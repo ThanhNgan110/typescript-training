@@ -5,6 +5,7 @@ import { orderSummary } from "../templates/checkout.template";
 import Order from "../type/order";
 import { Product } from "../type/product";
 import State from "../type/state";
+import { Countries } from "../type/countries";
 
 export default class CheckoutView {
   wrapperCheckout: Element | null;
@@ -22,7 +23,7 @@ export default class CheckoutView {
 
   setDefaultCountry = (
     handler: (selectCountry: string) => void,
-    countries: number[]
+    countries: Countries[]
   ) => {
     const countrySelect: HTMLElement | null =
       document.getElementById("country");
@@ -78,7 +79,7 @@ export default class CheckoutView {
     return;
   };
 
-  handleRenderCountry = (countries: []) => {
+  handleRenderCountry = (countries: Countries []) => {
     this.handleDataDropdown(countries, "country");
   };
 
@@ -110,7 +111,7 @@ export default class CheckoutView {
 
   updateFormUi = (formErrorMess: {
     [key: string]: string;
-  }): { error?: string } | void => {
+  }) => {
     const form: HTMLElement | null = getElementById("form-checkout");
     const btnOrder: HTMLElement | null = getElementById("btn-order");
 

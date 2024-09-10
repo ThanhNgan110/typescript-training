@@ -8,6 +8,7 @@ export default class StateService extends ApiService<State> {
   }
 
   getState = async () => {
-    return await this.get();
+    const states = await this.get();
+    return Array.isArray(states) ? states : [];
   };
 }

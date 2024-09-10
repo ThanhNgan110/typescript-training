@@ -11,3 +11,7 @@ export type ValidateInteger = {
 	key: keyValue;
 	value: number;
 };
+
+export type ValidateEmpty = {
+  
+}

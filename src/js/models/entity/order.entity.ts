@@ -16,7 +16,7 @@ export default class OrderEntity implements Order {
   zipCode: string;
   email: string;
   phoneNumber: string;
-  note: string;
+  note?: string;
 
   constructor(data: Order) {
     this.firstName = data.firstName;
@@ -31,34 +31,36 @@ export default class OrderEntity implements Order {
 
   validate = (orderEntity: Partial<Order>) => {
     let formError = {};
-    const key = Object.keys(orderEntity)[0];
-    const value = orderEntity[key]; // Add type assertion here
 
-    if (!value && key !== "note") {
-      formError = validateEmpty({ key, value });
+    const key = Object.keys(orderEntity)[0] as keyof Order;
+    const value = orderEntity[key];
+
+    if (value === null && key !== "note") {
+      formError = validateEmpty({ key, value: "" });
     } else {
       switch (key) {
         case "firstName":
         case "lastName":
         case "address":
         case "companyName":
-          formError = validateString({ key, value });
+          formError = validateString({ key, value: value as string });
           break;
 
         case "zipCode":
-          formError = validateInteger({ key, value });
+          formError = validateInteger({ key, value: Number(value) });
           break;
 
         case "email":
-          formError = validateEmail({ key, value });
+          formError = validateEmail({ key, value: value as string });
           break;
 
         case "phoneNumber":
-          formError = validatePhone({ key, value });
+          formError = validatePhone({ key, value: value as string });
           break;
 
         case "note":
-          formError = { key, value };
+          formError = { key, value: value as string };
+          break;
 
         default:
           break;
