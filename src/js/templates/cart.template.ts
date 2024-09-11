@@ -1,10 +1,11 @@
 import { ALERT_MESSAGE } from "../constants/message";
+import { Product } from "../type/product";
 
-export const cartSum = (products) => {
+export const cartSum = (products: Product[]) => {
   let total = 0;
   if (products) {
     products.forEach((item) => {
-      total += parseFloat(item.amount * item.price);
+      total += parseFloat((item.amount * item.price).toString());
     });
   }
   return {
@@ -13,7 +14,7 @@ export const cartSum = (products) => {
   };
 };
 
-export const displayCart = (products) => {
+export const displayCart = (products: Product[]): string => {
   const { product, total } = cartSum(products);
   const isEmpty = product.length === 0;
   let contentCart = "";
@@ -21,6 +22,7 @@ export const displayCart = (products) => {
     product.forEach((item) => {
       contentCart += cartTemplate(item);
     });
+    
   } else {
     contentCart = `<tr><td><p class="text-empty">${ALERT_MESSAGE.CART_EMPTY_HEADING}</p></td></tr>`;
   }
@@ -61,11 +63,11 @@ export const displayCart = (products) => {
    `;
 };
 
-export const cartTemplate = (product) => {
+export const cartTemplate = (product: Product): string => {
   const { id, name, price, imgURL, amount } = product;
   const subtotal = (price * amount).toFixed(2);
   return `
-    <tr class="col-tbody" data-id=${id} >
+    <tr class="col-tbody" data-id=${id}>
       <td>
         <div class="product-item">
           <img style="width:100px" src="${imgURL}" alt="${name}" />

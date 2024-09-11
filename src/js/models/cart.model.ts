@@ -1,0 +1,35 @@
+import CartEntity from "./entity/cart.entity";
+import { Cart, Product } from "../type/product";
+import BaseModel from "./base.model";
+
+export default class CartModel extends BaseModel<Cart> {
+  setCart = (products: Cart[]) => {
+    this.setEntities(products, CartEntity);
+  };
+
+  getCart = (): Cart[] => {
+    return this.getEntities();
+  };
+
+  getProductById = (id: string) => {
+    return this.findById(id, "id");
+  };
+
+  checkProductIdExisting = (id: string) => {
+    return this.getProductById(id);
+  };
+
+  totalProductAndPrice(products: Product[]){
+    let total = 0;
+    if (products) {
+      products.forEach((item) => {
+        total += parseFloat((item.amount * item.price).toFixed(2));
+      });
+    }
+
+    return {
+      products: products,
+      total: parseFloat(total.toFixed(2)),
+    };
+  }
+}

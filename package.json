@@ -1,18 +1,21 @@
 {
-  "name": "practice-two",
-  "version": "1.0.0",
-  "description": "This is practice about javascript",
-  "scripts": {
-    "build": "parcel build ./src/*.html --no-cache --no-source-maps --dist-dir dist",
-    "dev": "rm -rf dist-dev .parcel-cache && parcel --dist-dir dist-dev src/index.html"
-  },
-  "author": "thanhngan",
-  "license": "ISC",
-  "devDependencies": {
-    "parcel": "2.12.0",
-    "posthtml-include": "^2.0.1"
-  },
-  "dependencies": {
-    "toastify-js": "^1.12.0"
-  }
+	"name": "practice-typescript",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc",
+		"dev": "rm -rf dist-dev .parcel-cache && parcel --dist-dir dist-dev src/index.html"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"parcel": "^2.12.0",
+		"posthtml-include": "^2.0.1",
+		"typescript": "^5.5.4"
+	},
+	"dependencies": {
+		"toastify-js": "^1.12.0"
+	}
 }
